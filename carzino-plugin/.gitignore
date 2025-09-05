@@ -1,0 +1,12 @@
+# Ignore dependencies
+/frontend/node_modules
+/frontend/.vite
+/frontend/.cache
+
+# Ignore build artifacts that will be regenerated
+/frontend/dist
+/build
+
+# OS junk
+.DS_Store
+Thumbs.db
