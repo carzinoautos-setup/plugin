@@ -1,6 +1,6 @@
 # Carzino Plugin Repository
 
-This repository contains the **Carzino WordPress Plugin** and all related configuration for GitHub Actions builds and deployment.
+This repository contains IS the **Carzino WordPress Plugin** and all related configuration for GitHub Actions builds and deployment.
 
 ## Structure
 
