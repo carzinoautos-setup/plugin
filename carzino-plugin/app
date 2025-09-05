@@ -1,0 +1,12 @@
+- name: Install dependencies
+  working-directory: carzino-plugin/app
+  run: npm install
+
+- name: Build React app
+  working-directory: carzino-plugin/app
+  run: npm run build
+
+- name: Copy build output to plugin
+  run: |
+    rm -rf carzino-plugin/build/*
+    cp -r carzino-plugin/app/dist/* carzino-plugin/build/
