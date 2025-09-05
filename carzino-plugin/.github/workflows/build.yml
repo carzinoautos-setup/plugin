@@ -2,9 +2,12 @@ name: Build React App
 
 on:
   push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+    paths:
+      - "frontend/**"
+      - "package.json"
+      - "vite.config.js"
+      - ".github/workflows/build.yml"
+      - "README.md"
 
 jobs:
   build:
@@ -14,30 +17,31 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Set up Node.js
+      - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 18
+          cache: "npm"
 
       - name: Install dependencies
         run: |
-          cd carzino-plugin/frontend
-          npm install
+          cd frontend
+          npm ci
 
-      - name: Build project
+      - name: Build React app
         run: |
-          cd carzino-plugin/frontend
+          cd frontend
           npm run build
 
-      - name: Move build output
+      - name: Copy build output to plugin
         run: |
-          rm -rf carzino-plugin/build/*
-          cp -r carzino-plugin/frontend/dist/* carzino-plugin/build/
+          rm -rf plugin/build/*
+          cp -r frontend/dist/* plugin/build/
 
-      - name: Commit build output
+      - name: Commit build artifacts
         run: |
-          git config --global user.name 'github-actions'
-          git config --global user.email 'github-actions@github.com'
-          git add carzino-plugin/build
-          git commit -m "Update build output" || echo "No changes to commit"
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add plugin/build
+          git commit -m "Update build artifacts" || echo "No changes to commit"
           git push
