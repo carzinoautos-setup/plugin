@@ -28,7 +28,15 @@ jobs:
           cd carzino-plugin/frontend
           npm run build
 
-      - name: Copy build output
+      - name: Move build output
         run: |
-          mkdir -p carzino-plugin/build
+          rm -rf carzino-plugin/build/*
           cp -r carzino-plugin/frontend/dist/* carzino-plugin/build/
+
+      - name: Commit build output
+        run: |
+          git config --global user.name 'github-actions'
+          git config --global user.email 'github-actions@github.com'
+          git add carzino-plugin/build
+          git commit -m "Update build output" || echo "No changes to commit"
+          git push
