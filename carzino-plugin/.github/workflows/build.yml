@@ -28,8 +28,7 @@ jobs:
           cd carzino-plugin/frontend
           npm run build
 
-      - name: Upload build artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: react-build
-          path: carzino-plugin/frontend/dist
+      - name: Copy build output
+        run: |
+          mkdir -p carzino-plugin/build
+          cp -r carzino-plugin/frontend/dist/* carzino-plugin/build/
