@@ -4,9 +4,10 @@ on:
   push:
     branches: [ main ]
     paths:
-      - "carzino-plugin/**"
+      - "carzino-plugin/app/**"
       - ".github/workflows/build.yml"
       - "README.md"
+  workflow_dispatch:  # allows manual run from Actions tab
 
 jobs:
   build:
@@ -22,19 +23,17 @@ jobs:
           node-version: 18
 
       - name: Install dependencies
-        run: |
-          cd carzino-plugin
-          npm install
+        working-directory: carzino-plugin/app
+        run: npm install
 
       - name: Build React app
-        run: |
-          cd carzino-plugin
-          npm run build
+        working-directory: carzino-plugin/app
+        run: npm run build
 
       - name: Copy build output to plugin
         run: |
           rm -rf carzino-plugin/build/*
-          cp -r carzino-plugin/dist/* carzino-plugin/build/
+          cp -r carzino-plugin/app/dist/* carzino-plugin/build/
 
       - name: Commit build artifacts
         run: |
