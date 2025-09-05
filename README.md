@@ -1,7 +1,7 @@
-# Carzino Plugin Repository
+# Carzino Plugin Repository 
 
 This repository contains the **Carzino WordPress Plugin**, which integrates a React frontend app into WordPress via a shortcode.  
-All builds are automated using **GitHub Actions** — no local building required. Hello
+All builds are automated using **GitHub Actions** — no local building required. Hello2
 
 ---
 
