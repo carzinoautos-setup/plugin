@@ -4,9 +4,9 @@ on:
   push:
     branches: [ main ]
     paths:
-      - "carzino-plugin/frontend/**"
-      - "carzino-plugin/package.json"
-      - "carzino-plugin/vite.config.js"
+      - "plugin/carzino-plugin/frontend/**"
+      - "plugin/carzino-plugin/package.json"
+      - "plugin/carzino-plugin/vite.config.js"
       - ".github/workflows/build.yml"
       - "README.md"
 
@@ -25,23 +25,23 @@ jobs:
 
       - name: Install dependencies
         run: |
-          cd carzino-plugin/frontend
+          cd plugin/carzino-plugin/frontend
           npm install
 
       - name: Build React app
         run: |
-          cd carzino-plugin/frontend
+          cd plugin/carzino-plugin/frontend
           npm run build
 
       - name: Copy build output to plugin
         run: |
-          rm -rf carzino-plugin/build/*
-          cp -r carzino-plugin/frontend/dist/* carzino-plugin/build/
+          rm -rf plugin/carzino-plugin/build/*
+          cp -r plugin/carzino-plugin/frontend/dist/* plugin/carzino-plugin/build/
 
       - name: Commit build artifacts
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add carzino-plugin/build
+          git add plugin/carzino-plugin/build
           git commit -m "Update build artifacts" || echo "No changes to commit"
           git push
